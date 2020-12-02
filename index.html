@@ -7,9 +7,32 @@
     ></script>
 
     <style type = "text/css">
+      main{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 80vw;
+        margin: 0 auto;
+      }
+
+      #logoImg{
+        width: 40vw;
+        height: auto;  
+      }
+
       #navigation li{
         list-style: none;
         padding: 5px;
+        width: 100%;
+      }
+      ul{
+        padding: 0;
+        width: 30vw;
+      }
+      li{
+        display: flex;
+        justify-content: space-evenly;
       }
 
       #navigation {
@@ -20,7 +43,27 @@
         /* background-color: red; */
         
       }
-
+      button{
+        outline: none;
+        cursor: pointer;
+      }
+      li{
+        border: 1px solid white;
+      }
+      li:hover{
+        border: 1px solid black;
+        border-radius: 5px;
+        transition: border 0.5s ease-in-out;
+      }
+      li button{
+        border: none;
+        cursor: pointer;
+        background-color: black;
+        color: white;
+      }
+      li button:hover{
+        color:rgb(178, 178, 178);
+      }
       p{
         color: blue;
       }
@@ -28,40 +71,124 @@
         background-color: white;
         border: 1px solid black;
         border-radius: 2px;
-        margin-left: 10px;
       }
+      .inputNew{
+        padding: 1vw;
+        width: 30vw;
+        text-align: center;
+        font-size: 1.5rem;
+      }
+      .inputNew input{
+        width: 98%;
+        margin-bottom: 1vh;
+        outline:none;
+        font-size: 1.5rem;
+        margin: 2vh 0;
+
+      }
+      .inputNew button{
+        border: 1px solid black;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 1.5rem;
+
+      }
+
+      .inputNew button:hover{
+        transition: all 0.5s ease-in-out;
+        background-color: black;
+        color: white;
+      }
+
+      .logoTitle{
+        font-size: 2rem;
+        color: skyblue;
+        text-align: center;
+        margin-bottom: 1vh;
+      }
+
     </style>
   </head>
   <body>
-    <input id="sample" type ="text" placeholder="text!" value ="sample"/>
-    <button type="submit" class ="submit">submit</button>
-    <ul id="navigation">
-      <li><span>HTML</span><button>Delete</button></li>
-      <li><span>CSS</span><button>Delete</button></li>
-      <li ><span>javascript</span><button>Delete</button></li>
-      <li><span>jquery<button>Delete</button></li>
-      <li><span>React.js</span><button>Delete</button></li>
-    </ul>
-    <p></p>
+    <main>
+      <img id = "logoImg" alt = "jQueryImage"src ="https://media.vlpt.us/images/cloudlee711/post/f97f9c06-9957-4099-83ec-5b6a9c09d0b4/image.png?w=768" />
+      <div class ="logoTitle">Sample List for jQuery Study</div>
+      <ul id="navigation">
+        <li>
+          <span>HTML</span>
+          <button>Modify</button>
+          <button>Delete</button>
+        </li>
+        <li>
+          <span>CSS</span>
+          <button>Modify</button>
+          <button>Delete</button>
+        </li>
+        <li >
+          <span>javascript</span>
+          <button>Modify</button>
+          <button>Delete</button>
+          </li>
+        <li>
+          <span>jquery</span>
+          <button>Modify</button>
+          <button>Delete</button>
+        </li>
+        <li>
+          <span>React.js</span>
+          <button>Modify</button>
+          <button>Delete</button>
+        </li>
+      </ul>
+      <div class="inputNew">
+        <div>Type New One!</div>
+        <input id="sample" type ="text" placeholder="Type your text!" value =""/>
+        <button type="submit" class ="submit">submit</button>
+      </div>
+    </main>
 
     <script type = text/javascript>
-      $('#navigation li').live('click', function(){
-        $('#navigation li').removeClass('selected');
-        $(this).addClass('selected');
-      })
-
-      $('.submit').click(function(){
+      //create func.
+      const create = ()=>{
         var value = $("#sample").val();
         let list = $('#navigation')
         if(value){
-          list.append(`<li><span>${value}</span><button>Delete</button></li>`);
+          list.append(`<li><span>${value}</span><button>Modify</button><button>Delete</button></li>`);
         }
         else{
           alert('input any value');
         }
         
         $('#sample').attr('value', "");
-      });
+      }
+
+      $('.submit').click(create);
+
+      //modify func.
+      const modify = (e)=>{
+        let innerText = $(e.target).siblings('span').html();
+        console.log(e.target)
+        $(e.target).siblings('span').css('color','red');
+        $(e.target).siblings('span').append(`<input type = "text" value = "${innerText}"/> <button>Done</button>`)
+      }
+
+      const done = (e)=>{
+        let innerText = $(e.target).siblings('input').attr('value'); //driven input value
+        console.log(innerText)
+        $(e.target).parent('span').html(innerText)// input new value 
+      }
+
+      $('button:contains("Modify")').one('click',modify);
+      $('button:contains("Done")').live('click',done);
+
+      //delete func.
+      const delete1 =(e)=>{
+        console.log(e.target)
+        $(e.target).parent('li').remove();
+      }
+      $('button:contains("Delete")').live('click',delete1);
+
+
     </script>
   </body>
 </html>
