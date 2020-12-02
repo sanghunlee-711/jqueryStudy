@@ -168,7 +168,7 @@
       const modify = (e)=>{
         let innerText = $(e.target).siblings('span').html();
         console.log(e.target)
-        $(e.target).siblings('span').css('color','red');
+        $(e.target).siblings('span')
         $(e.target).siblings('span').append(`<input type = "text" value = "${innerText}"/> <button>Done</button>`)
       }
 
@@ -178,7 +178,7 @@
         $(e.target).parent('span').html(innerText)// input new value 
       }
 
-      $('button:contains("Modify")').one('click',modify);
+      $('button:contains("Modify")').live('click',modify);
       $('button:contains("Done")').live('click',done);
 
       //delete func.
