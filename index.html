@@ -16,6 +16,19 @@
         margin: 0 auto;
       }
 
+      p{
+        color: blue;
+      }
+      
+      button{
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 2px;
+      }
+
+      input{
+        outline: none;
+      }
       #logoImg{
         width: 40vw;
         height: auto;  
@@ -39,39 +52,33 @@
         cursor: pointer;
       }
 
-      #navigation .selected{
-        /* background-color: red; */
-        
-      }
       button{
         outline: none;
         cursor: pointer;
       }
+
       li{
         border: 1px solid white;
       }
+
       li:hover{
         border: 1px solid black;
         border-radius: 5px;
         transition: border 0.5s ease-in-out;
       }
+
       li button{
         border: none;
         cursor: pointer;
         background-color: black;
         color: white;
       }
+
       li button:hover{
         color:rgb(178, 178, 178);
       }
-      p{
-        color: blue;
-      }
-      button{
-        background-color: white;
-        border: 1px solid black;
-        border-radius: 2px;
-      }
+      
+
       .inputNew{
         padding: 1vw;
         width: 30vw;
@@ -166,10 +173,14 @@
 
       //modify func.
       const modify = (e)=>{
+        let forCheck = $(e.target).siblings('span').find('input').length;
         let innerText = $(e.target).siblings('span').html();
-        console.log(e.target)
-        $(e.target).siblings('span').css('color','red');
+        if(forCheck <= 0){
+          $(e.target).siblings('span')
         $(e.target).siblings('span').append(`<input type = "text" value = "${innerText}"/> <button>Done</button>`)
+        $(e.target).siblings('span').contents()[0].textContent=""
+
+        }
       }
 
       const done = (e)=>{
@@ -178,7 +189,7 @@
         $(e.target).parent('span').html(innerText)// input new value 
       }
 
-      $('button:contains("Modify")').one('click',modify);
+      $('button:contains("Modify")').live('click',modify);
       $('button:contains("Done")').live('click',done);
 
       //delete func.
