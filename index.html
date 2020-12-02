@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <body>
-    <div class="welcome"></div>
-    <div id="welcome2"></div>
+  <head>
     <script
       type="text/javascript"
       src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
     ></script>
-    <script type="text/javascript">
-      $(".welcome")
-        .html("hello world! ")
-        .css("background-color", "yellow")
-        .css("color", "red");
-      $("#welcome2")
-        .html("whatsup")
-        .css("color", "blue")
-        .css("width", "100vw")
-        .css("background-color", "red")
-        .css("height", "100vh");
-      const welcomeTest = document.querySelector(".welcome");
-      const checkFunction = () => {
-        let count = 0;
-        while (count != 100) {
-          console.log(count);
-          count += 1;
-        }
-        console.log("HelloWorld!");
-        alert("helloWorld!");
-      };
-      welcomeTest.addEventListener("click", checkFunction);
+    <script type = text/javascript>
+      $('#navigation li').live('click', function(){
+        $('#navigation li').removeClass('selected');
+        $(this).addClass('selected');
+      })
     </script>
+    <style type = "text/css">
+      #navigation li{
+        list-style: none;
+        float: left;
+        padding: 5px;
+      }
+
+      #navigation {
+        cursor: pointer;
+      }
+
+      #navigation .selected{
+        background-color: red;
+        
+      }
+    </style>
+  </head>
+  <body>
+    <ul id = "navigation">
+      <li>HTML</li>
+      <li>CSS</li>
+      <li class ="selected">javascript</li>
+      <li>jquery</li>
+      <li>PHP</li>
+      <li>mysql</li>
+    </ul>
   </body>
 </html>
