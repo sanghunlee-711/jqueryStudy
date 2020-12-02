@@ -5,16 +5,10 @@
       type="text/javascript"
       src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
     ></script>
-    <script type = text/javascript>
-      $('#navigation li').live('click', function(){
-        $('#navigation li').removeClass('selected');
-        $(this).addClass('selected');
-      })
-    </script>
+
     <style type = "text/css">
       #navigation li{
         list-style: none;
-        float: left;
         padding: 5px;
       }
 
@@ -23,19 +17,51 @@
       }
 
       #navigation .selected{
-        background-color: red;
+        /* background-color: red; */
         
+      }
+
+      p{
+        color: blue;
+      }
+      button{
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 2px;
+        margin-left: 10px;
       }
     </style>
   </head>
   <body>
-    <ul id = "navigation">
-      <li>HTML</li>
-      <li>CSS</li>
-      <li class ="selected">javascript</li>
-      <li>jquery</li>
-      <li>PHP</li>
-      <li>mysql</li>
+    <input id="sample" type ="text" placeholder="text!" value ="sample"/>
+    <button type="submit" class ="submit">submit</button>
+    <ul id="navigation">
+      <li><span>HTML</span><button>Delete</button></li>
+      <li><span>CSS</span><button>Delete</button></li>
+      <li ><span>javascript</span><button>Delete</button></li>
+      <li><span>jquery<button>Delete</button></li>
+      <li><span>React.js</span><button>Delete</button></li>
     </ul>
+    <p></p>
+
+    <script type = text/javascript>
+      $('#navigation li').live('click', function(){
+        $('#navigation li').removeClass('selected');
+        $(this).addClass('selected');
+      })
+
+      $('.submit').click(function(){
+        var value = $("#sample").val();
+        let list = $('#navigation')
+        if(value){
+          list.append(`<li><span>${value}</span><button>Delete</button></li>`);
+        }
+        else{
+          alert('input any value');
+        }
+        
+        $('#sample').attr('value', "");
+      });
+    </script>
   </body>
 </html>
