@@ -145,17 +145,18 @@
       </ul>
       <div class="inputNew">
         <div>Type New One!</div>
-        <input id="sample" type ="text" placeholder="Type your text!" value =""/>
+        <input class = "typeSubmit" id="sample" type ="text" placeholder="Type your text!" value =""/>
         <button type="submit" class ="submit">submit</button>
       </div>
     </main>
 
     <script type = text/javascript>
-      const enterFucntion = (key, func)=>{
-        if(key.keyCode ===13){
-          func();
-        }
-      }
+      // const enterFucntion = (key, func)=>{
+      //   console.log(key)
+      //   if(key.keyCode == 13){
+      //     func();
+      //   }
+      // }
 
       //create func.
       const create = ()=>{
@@ -172,15 +173,20 @@
       }
 
       $('.submit').click(create);
-      $('.submit').
+      $('.typeSubmit').keydown(function(key){
+        if(key.keyCode === 13){
+          create();
+        }
+      })
 
       //modify func.
       const modify = (e)=>{
         let forCheck = $(e.target).siblings('span').find('input').length;
         let innerText = $(e.target).siblings('span').html();
+        
         if(forCheck <= 0){
           $(e.target).siblings('span')
-        $(e.target).siblings('span').append(`<input type = "text" value = "${innerText}"/> `)
+        $(e.target).siblings('span').append(`<input class="modifyInput" type = "text" value = "${innerText}"/> `)
         $(e.target).siblings('span').contents()[0].textContent=""
         }
 
@@ -188,16 +194,26 @@
           let inputText = $(e.target).siblings('span').find('input').attr('value'); //driven input value
           $(e.target).siblings('span').html(inputText)// input new value 
         }
+        else if(e.keyCode === 13){
+          console.log("Hello")
+        }
       }
 
       $('button:contains("Modify")').live('click',modify);
+      $('.modifyInput').live('keydown',function(e){
+        console.log(e.keyCode)
+        if(e.keyCode ===13){
+          let inputValue = $(e.target).attr('value');
+          $(e.target).parents('span').html(inputValue)
+        }
+      })
 
       //delete func.
-      const delete1 =(e)=>{
+      const deleteList =(e)=>{
         console.log(e.target)
         $(e.target).parent('li').remove();
       }
-      $('button:contains("Delete")').live('click',delete1);
+      $('button:contains("Delete")').live('click',deleteList);
 
 
     </script>
