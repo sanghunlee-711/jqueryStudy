@@ -7,6 +7,7 @@
     ></script>
 
     <style type = "text/css">
+
       main{
         display: flex;
         flex-direction: column;
@@ -24,21 +25,14 @@
         background-color: white;
         border: 1px solid black;
         border-radius: 2px;
+        outline: none;
+        cursor: pointer;
       }
 
       input{
         outline: none;
       }
-      #logoImg{
-        width: 40vw;
-        height: auto;  
-      }
 
-      #navigation li{
-        list-style: none;
-        padding: 5px;
-        width: 100%;
-      }
       ul{
         padding: 0;
         width: 30vw;
@@ -46,18 +40,6 @@
       li{
         display: flex;
         justify-content: space-evenly;
-      }
-
-      #navigation {
-        cursor: pointer;
-      }
-
-      button{
-        outline: none;
-        cursor: pointer;
-      }
-
-      li{
         border: 1px solid white;
       }
 
@@ -66,7 +48,6 @@
         border-radius: 5px;
         transition: border 0.5s ease-in-out;
       }
-
       li button{
         border: none;
         cursor: pointer;
@@ -79,32 +60,20 @@
       }
       
 
-      .inputNew{
-        padding: 1vw;
-        width: 30vw;
-        text-align: center;
-        font-size: 1.5rem;
+      #logoImg{
+        width: 40vw;
+        height: auto;  
       }
-      .inputNew input{
-        width: 98%;
-        margin-bottom: 1vh;
-        outline:none;
-        font-size: 1.5rem;
-        margin: 2vh 0;
 
-      }
-      .inputNew button{
-        border: 1px solid black;
-        border-radius: 5px;
+      #navigation li{
+        list-style: none;
+        padding: 5px;
         width: 100%;
-        font-size: 1.5rem;
-
       }
 
-      .inputNew button:hover{
-        transition: all 0.5s ease-in-out;
-        background-color: black;
-        color: white;
+
+      #navigation {
+        cursor: pointer;
       }
 
       .logoTitle{
@@ -114,6 +83,33 @@
         margin-bottom: 1vh;
       }
 
+      .inputNew{
+        padding: 1vw;
+        width: 30vw;
+        text-align: center;
+        font-size: 1.5rem;
+      }
+
+      .inputNew input{
+        width: 98%;
+        margin-bottom: 1vh;
+        outline:none;
+        font-size: 1.5rem;
+        margin: 2vh 0;
+      }
+
+      .inputNew button{
+        border: 1px solid black;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 1.5rem;
+      }
+
+      .inputNew button:hover{
+        transition: all 0.5s ease-in-out;
+        background-color: black;
+        color: white;
+      }
     </style>
   </head>
   <body>
@@ -155,6 +151,12 @@
     </main>
 
     <script type = text/javascript>
+      const enterFucntion = (key, func)=>{
+        if(key.keyCode ===13){
+          func();
+        }
+      }
+
       //create func.
       const create = ()=>{
         var value = $("#sample").val();
@@ -170,6 +172,7 @@
       }
 
       $('.submit').click(create);
+      $('.submit').
 
       //modify func.
       const modify = (e)=>{
@@ -177,20 +180,17 @@
         let innerText = $(e.target).siblings('span').html();
         if(forCheck <= 0){
           $(e.target).siblings('span')
-        $(e.target).siblings('span').append(`<input type = "text" value = "${innerText}"/> <button>Done</button>`)
+        $(e.target).siblings('span').append(`<input type = "text" value = "${innerText}"/> `)
         $(e.target).siblings('span').contents()[0].textContent=""
+        }
 
+        else if(forCheck > 0){
+          let inputText = $(e.target).siblings('span').find('input').attr('value'); //driven input value
+          $(e.target).siblings('span').html(inputText)// input new value 
         }
       }
 
-      const done = (e)=>{
-        let innerText = $(e.target).siblings('input').attr('value'); //driven input value
-        console.log(innerText)
-        $(e.target).parent('span').html(innerText)// input new value 
-      }
-
       $('button:contains("Modify")').live('click',modify);
-      $('button:contains("Done")').live('click',done);
 
       //delete func.
       const delete1 =(e)=>{
